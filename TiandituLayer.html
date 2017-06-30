@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+    <title>天地图</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css">
+    <style>
+        html, body, #map {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script type="text/javascript">
+        var dojoConfig = {
+            packages: [{
+                name: 'ext',
+                location: location.pathname.replace(/\/[^/]+$/, "") + '/js/layers'
+            }]
+        };
+    </script>
+    <script src="https://js.arcgis.com/3.20/"></script>
+    <script>
+        var map;
+
+        require(["esri/map",
+                    "esri/geometry/Extent",
+                    "ext/TiandituLayer",
+                    "dojo/domReady!"],
+                function (Map,
+                          Extent,
+                          TianDiTuLayer) {
+
+                    map = new Map("map", {
+                        extent: new Extent({
+                            "xmin": 72,
+                            "ymin": 20,
+                            "xmax": 138,
+                            "ymax": 50,
+                            "spatialReference": {"wkid": 4326}
+                        })
+                    });
+//                    // 初始化底图和注记图层
+                    var baseLayer = new TianDiTuLayer({type:'vec',wkid:4326});
+                    baseLayer.id = "BASE_LYR";
+                    var annolayer = new TianDiTuLayer({type:'cva',wkid:4326});
+                    annolayer.id = "ANNO_LYR";
+                    map.addLayer(baseLayer);
+                    map.addLayer(annolayer);
+                });
+    </script>
+</head>
+
+<body>
+    <div id="map"></div>
+</body>
+</html>
