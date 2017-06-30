@@ -30,7 +30,7 @@
                     "dojo/domReady!"],
                 function (Map,
                           Extent,
-                          TianDiTuLayer) {
+                          TiandituLayer) {
 
                     map = new Map("map", {
                         extent: new Extent({
@@ -42,9 +42,9 @@
                         })
                     });
 //                    // 初始化底图和注记图层
-                    var baseLayer = new TianDiTuLayer({type:'vec',wkid:4326});
+                    var baseLayer = new TiandituLayer({type:'vec',wkid:4326});
                     baseLayer.id = "BASE_LYR";
-                    var annolayer = new TianDiTuLayer({type:'cva',wkid:4326});
+                    var annolayer = new TiandituLayer({type:'cva',wkid:4326});
                     annolayer.id = "ANNO_LYR";
                     map.addLayer(baseLayer);
                     map.addLayer(annolayer);
